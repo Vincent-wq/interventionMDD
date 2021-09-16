@@ -6,16 +6,16 @@ WD_DIR=${HOME}/scratch
 DATA_DIR=${WD_DIR}/${DATA_NAME}
 BIDS_DIR=${DATA_DIR}_BIDS
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
-CODE_SLURM=${CODE_DIR}/fmriprep_func.slurm
-CODE_COLLECT=${CODE_DIR}/fmriprep_func.format
+CODE_SLURM=${CODE_DIR}/fmriprep_anat.slurm
+CODE_COLLECT=${CODE_DIR}/fmriprep_anat.format
 
 SUB_LIST=${CODE_DIR}/${DATA_NAME}_fmriprep.list
 CON_IMG=${WD_DIR}/container_images/fmriprep_v20.2.0.simg
 
-OUT_DIR=${DATA_DIR}_fmriprep_func_20.2.0
-LOG_DIR=${DATA_DIR}_fmriprep_func.log
-SLURM_LOG_DIR=${DATA_DIR}_fmriprep_func_log
-WORK_DIR=${DATA_DIR}_fmriprep_func_work
+OUT_DIR=${DATA_DIR}_fmriprep_anat_20.2.0
+LOG_DIR=${DATA_DIR}_fmriprep_anat.log
+SLURM_LOG_DIR=${DATA_DIR}_fmriprep_anat_log
+WORK_DIR=${DATA_DIR}_fmriprep_anat_work
 
 FREESURFER_LICENSE="${WD_DIR}/container_images"
 TEMPLATEFLOW_HOST_HOME=$HOME/scratch/templateflow
