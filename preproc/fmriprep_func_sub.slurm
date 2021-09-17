@@ -20,14 +20,14 @@ SUB_ID=(${@:3:1})
 WD_DIR=${HOME}/scratch
 DATA_DIR=${WD_DIR}/${DATA_NAME}
 BIDS_DIR=${DATA_DIR}_BIDS
-DERIVS_DIR=${DATA_DIR}_fmriprep_anat_20.2.0
+DERIVS_DIR=${DATA_DIR}_fmriprep_func_20.2.0
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
 
 echo ${BIDS_DIR}***${DERIVS_DIR}***${CON_IMG}***${DATA_NAME}***${SUB_ID}***${SES_ID}
 
 FMRIPREP_HOME=fmriprep_home_${SUB_ID}
-LOG_DIR=${DATA_DIR}_fmriprep_anat_slurm_log
-WORK_DIR=${DATA_DIR}_fmriprep_anat_work
+LOG_DIR=${DATA_DIR}_fmriprep_func_slurm_log
+WORK_DIR=${DATA_DIR}_fmriprep_func_work
 echo "Processing: sub-${SUB_ID} with home dir: ${FMRIPREP_HOME}"
 mkdir -p ${FMRIPREP_HOME}
 
