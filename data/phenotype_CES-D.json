@@ -1,0 +1,8 @@
+{
+    "MeasurementToolMetadata": {
+        "Description": "German version of the Center for Epidemiological Studies Depression Scale(CES-D). Hautzinger, M., Bailer, M., Hofmeister, D., & Keller, F. (2012). Allgemeine Depressionsskala (ADS). Manual (2. Auflage). Göttingen: Hogrefe Verlag GmbH. This self-assessing scale comprises 20 items covering depressive symptoms in the emotional, motivational, cognitive, somatic, and motoric domain. Participants had to indicate the extent to which the given conditions apply to them in the last week on a four-point scale ranging from “infrequent” to “the most time”. "
+    },
+    "CES-D_1": {"Description": "Sum of ADS score at the FIRST time point."},
+    "CES-D_2": {"Description": "Sum of ADS score at the SECOND time point."},
+    "CES-D_3": {"Description": "Sum of ADS score at the THIRD time point."}
+}
