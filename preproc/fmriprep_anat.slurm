@@ -2,7 +2,7 @@
 #
 #SBATCH -J fmriprep_vince
 #SBATCH --time=48:00:00
-#SBATCH --account=rrg-jbpoline
+#SBATCH --account=def-jbpoline
 #SBATCH --cpus-per-task=8
 #SBATCH --mem-per-cpu=8G
 # Outputs ----------------------------------
