@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 #SBATCH -J fmriprep_vince
-#SBATCH --time=30:00:00
-#SBATCH --account=rpp-aevans-ab
+#SBATCH --time=48:00:00
+#SBATCH --account=rrg-jbpoline
 #SBATCH --cpus-per-task=8
 #SBATCH --mem-per-cpu=8G
 # Outputs ----------------------------------
