@@ -65,9 +65,10 @@ cmd="${SINGULARITY_CMD} /data /output participant --participant-label $SUB_ID \
 --fs-subjects-dir /fsdir \
 --fs-license-file /home/fmriprep/.freesurfer/license.txt \
 --cifti-out 91k --return-all-components --anat-only --ignore t2w --longitudinal \
---write-graph --skip_bids_validation --notrack --resource-monitor"
+--write-graph --skip_bids_validation --notrack"
 # --bids-filter-file ${BIDS_FILTER} e.g.  --bids-filter-file /codes/pre_opt.json\ --anat-only 
 # Setup done, run the command
+# remove --resources-monitor for bug in 20.2.7 version
 echo Running task ${SLURM_ARRAY_TASK_ID}
 echo Commandline: $cmd
 unset PYTHONPATH
