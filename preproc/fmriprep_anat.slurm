@@ -19,7 +19,7 @@ WD_DIR=${HOME}/scratch
 DATA_DIR=${WD_DIR}/${DATA_NAME}
 BIDS_DIR=${DATA_DIR}_BIDS
 FMRIPREP_VER=20.2.7
-DERIVS_DIR=${DATA_DIR}_fmriprep_anat_FMRIPREP_VER
+DERIVS_DIR=${DATA_DIR}_fmriprep_anat_${FMRIPREP_VER}
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
 SUB_LIST=${CODE_DIR}/${DATA_NAME}_fmriprep.list
 
