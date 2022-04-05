@@ -13,8 +13,13 @@ This project is a pilot study by Vincent to assess the intervention effect for M
         1. Intervention effects;
         2. Post intervention effects;
         3. 
+        
     2. Exploratory analysis
         1. structrual cov 
-    
+        
+    3. Methods:
+        1. Using fMRIPrep to process the BIDS dataset, technically treat the 3 sesseions as 3 datasets due to its incapability of dealing with longtitudinal data.
+        2. T
+       
 ## Gitrepo
     https://github.com/Vincent-wq

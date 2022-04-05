@@ -9,10 +9,11 @@ CODE_DIR=${WD_DIR}/interventionMDD/preproc
 CODE_SLURM=${CODE_DIR}/fmriprep_anat.slurm
 CODE_COLLECT=${CODE_DIR}/fmriprep_anat.format
 
+FMRIPREP_VER=20.2.7
 SUB_LIST=${CODE_DIR}/${DATA_NAME}_fmriprep.list
-CON_IMG=${WD_DIR}/container_images/fmriprep_v20.2.0.simg
+CON_IMG=${WD_DIR}/container_images/fmriprep_${FMRIPREP_VER}.sif
 
-OUT_DIR=${DATA_DIR}_fmriprep_anat_20.2.0
+OUT_DIR=${DATA_DIR}_fmriprep_anat_${FMRIPREP_VER}
 LOG_DIR=${DATA_DIR}_fmriprep_anat.log
 SLURM_LOG_DIR=${DATA_DIR}_fmriprep_anat_log
 WORK_DIR=${DATA_DIR}_fmriprep_anat_work

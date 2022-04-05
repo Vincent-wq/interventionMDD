@@ -18,11 +18,12 @@ CON_IMG=(${@:2:1})
 WD_DIR=${HOME}/scratch
 DATA_DIR=${WD_DIR}/${DATA_NAME}
 BIDS_DIR=${DATA_DIR}_BIDS
-DERIVS_DIR=${DATA_DIR}_fmriprep_anat_20.2.0
+FMRIPREP_VER=20.2.7
+DERIVS_DIR=${DATA_DIR}_fmriprep_anat_FMRIPREP_VER
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
 SUB_LIST=${CODE_DIR}/${DATA_NAME}_fmriprep.list
 
-echo ${BIDS_DIR}***${DERIVS_DIR}***${SUB_LIST}***${SINGULARITYENV_FS_LICENSE}***${CON_IMG}***${DATA_NAME}
+#echo ${BIDS_DIR}***${DERIVS_DIR}***${SUB_LIST}***${SINGULARITYENV_FS_LICENSE}***${CON_IMG}***${DATA_NAME}
 # subject ID and the corresponds BIDS filter
 SUB_STR=$(sed -n "${SLURM_ARRAY_TASK_ID}p" ${SUB_LIST})
 SUB_ID="$(cut -d'-' -f2 <<<${SUB_STR})"
@@ -63,7 +64,7 @@ cmd="${SINGULARITY_CMD} /data /output participant --participant-label $SUB_ID \
 -w /work --output-spaces MNI152NLin2009cAsym:res-2 anat fsnative fsaverage5 \
 --fs-subjects-dir /fsdir \
 --fs-license-file /home/fmriprep/.freesurfer/license.txt \
---cifti-out 91k --return-all-components --anat-only --ignore t2w \
+--cifti-out 91k --return-all-components --anat-only --ignore t2w --longitudinal \
 --write-graph --skip_bids_validation --notrack --resource-monitor"
 # --bids-filter-file ${BIDS_FILTER} e.g.  --bids-filter-file /codes/pre_opt.json\ --anat-only 
 # Setup done, run the command
