@@ -1,22 +1,38 @@
 #!/bin/bash
+if [ "$#" -ne 3 ]; then
 DATA_NAME=(${@:1:1})
-echo ${DATA_NAME}
+RUN_LIST='Y'
+else
+DATA_NAME=(${@:1:1})
 SUB_ID=(${@:2:1})
+SES_ID=(${@:3:1})
+RUN_LIST='N'
+fi
+echo ${DATA_NAME}
 
 WD_DIR=${HOME}/scratch
-DATA_DIR=${WD_DIR}/${DATA_NAME}
-BIDS_DIR=${DATA_DIR}_BIDS
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
-
 CODE_SLURM=${CODE_DIR}/fmriprep_anat_sub.slurm
+RERUN_LIST=${CODE_DIR}/runningMDD_rerun.csv
 
-CON_IMG=${WD_DIR}/container_images/fmriprep_v20.2.0.simg
-LOG_DIR=${DATA_DIR}_fmriprep_anat.log
+FMRIPREP_VER=20.2.7
+LOG_DIR=${WD_DIR}/${DATA_NAME}_fmriprep_anat.log
 
 chmod +x ${CODE_SLURM}
+echo "Starting fmriprep-subject level rerun!"
 
-echo "Step1: starting fmriprep-SP!"
+if [ ${RUN_LIST} == 'Y' ];then
+#RERUN_LIST="runningMDD_rerun.csv"
+while read line; do
+    # Do what you want to $name
+    SUB_ID="$(cut -d',' -f1 <<<${line})"
+    SES_ID="$(cut -d',' -f2 <<<${line})"
+    echo 'rerunning subj: ' ${SUB_ID} ', ses' ${SES_ID}
+    sbatch ${CODE_SLURM} ${DATA_NAME} ${FMRIPREP_VER} ${SUB_ID} ${SES_ID} >> ${LOG_DIR}
+done < ${RERUN_LIST}
 
-#SUB_ID=037S4028
-sbatch ${CODE_SLURM} ${DATA_NAME} ${CON_IMG} ${SUB_ID} >> ${LOG_DIR}
+else
+echo 'rerunning subj: ' ${SUB_ID} ', ses' ${SES_ID}
+sbatch ${CODE_SLURM} ${DATA_NAME} ${FMRIPREP_VER} ${SUB_ID} ${SES_ID} >> ${LOG_DIR}
+fi
 echo "Submission finished!"

@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-#SBATCH -J fmriprep_vince
+#SBATCH -J fmriprep_subj_vince
 #SBATCH --time=36:00:00
-#SBATCH --account=rpp-aevans-ab
+#SBATCH --account=def-jbpoline
 #SBATCH --cpus-per-task=12
 #SBATCH --mem-per-cpu=8G
 # Outputs ----------------------------------
@@ -13,22 +13,25 @@
 # ------------------------------------------
 
 DATA_NAME=(${@:1:1})
-CON_IMG=(${@:2:1})
+FMRIPREP_VER=(${@:2:1})
 SUB_ID=(${@:3:1})
-#SES_ID=(${@:4:1})
+SES_ID=(${@:4:1})
 
 WD_DIR=${HOME}/scratch
-DATA_DIR=${WD_DIR}/${DATA_NAME}
+DATA_DIR=${WD_DIR}/${DATA_NAME}SES_ID
 BIDS_DIR=${DATA_DIR}_BIDS
-DERIVS_DIR=${DATA_DIR}_fmriprep_anat_20.2.0
-CODE_DIR=${WD_DIR}/ET_biomarker/scripts/fmriprep
+CON_IMG=${WD_DIR}/container_images/fmriprep_${FMRIPREP_VER}.sif
+DERIVS_DIR=${DATA_DIR}_fmriprep_anat_${FMRIPREP_VER}
 
-echo ${BIDS_DIR}***${DERIVS_DIR}***${CON_IMG}***${DATA_NAME}***${SUB_ID}***${SES_ID}
+# Need to change according to projects
+CODE_DIR=${WD_DIR}/interventionMDD/preproc
+BIDS_FILTER="anat_ses-${SES_ID}.json"
+echo ${SUB_ID}***${BIDS_FILTER}
 
-FMRIPREP_HOME=fmriprep_home_${SUB_ID}
+FMRIPREP_HOME=fmriprep_home_${SUB_ID}_${SES_ID}
 LOG_DIR=${DATA_DIR}_fmriprep_anat_slurm_log
 WORK_DIR=${DATA_DIR}_fmriprep_anat_work
-echo "Processing: sub-${SUB_ID} with home dir: ${FMRIPREP_HOME}"
+echo "Processing: sub-${SUB_ID}, session ${SES_ID} with home dir: ${FMRIPREP_HOME}"
 mkdir -p ${FMRIPREP_HOME}
 
 LOCAL_FREESURFER_DIR="${DERIVS_DIR}/freesurfer-6.0.1"
@@ -43,6 +46,7 @@ mkdir -p ${FMRIPREP_HOST_CACHE}
 mkdir -p $FMRIPREP_HOME/.freesurfer
 export SINGULARITYENV_FS_LICENSE=$FMRIPREP_HOME/.freesurfer/license.txt
 cp container_images/license.txt ${SINGULARITYENV_FS_LICENSE}
+
 # Designate a templateflow bind-mount point
 export SINGULARITYENV_TEMPLATEFLOW_HOME="/templateflow"
 SINGULARITY_CMD="singularity run -B ${FMRIPREP_HOME}:/home/fmriprep --home /home/fmriprep --cleanenv \
@@ -61,8 +65,9 @@ cmd="${SINGULARITY_CMD} /data /output participant --participant-label $SUB_ID \
 -w /work --output-spaces MNI152NLin2009cAsym:res-2 anat fsnative fsaverage5 \
 --fs-subjects-dir /fsdir \
 --fs-license-file /home/fmriprep/.freesurfer/license.txt \
---cifti-out 91k --return-all-components --anat-only \
---write-graph --skip_bids_validation --notrack --resource-monitor"
+--cifti-out 91k --return-all-components --anat-only --ignore t2w --longitudinal \
+--bids-filter-file /codes/${BIDS_FILTER} \
+--write-graph --skip_bids_validation --notrack"
 # --bids-filter-file ${BIDS_FILTER} --anat-only --cifti-out 91k 
 # Setup done, run the command
 #echo Running task ${SLURM_ARRAY_TASK_ID}
