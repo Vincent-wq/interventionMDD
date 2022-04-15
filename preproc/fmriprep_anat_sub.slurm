@@ -30,7 +30,7 @@ echo ${SUB_ID}***${BIDS_FILTER}
 
 FMRIPREP_HOME=fmriprep_home_${SUB_ID}_${SES_ID}
 LOG_DIR=${DATA_DIR}_fmriprep_anat_slurm_log
-WORK_DIR=${DATA_DIR}_fmriprep_anat_work
+WORK_DIR=${DATA_DIR}_work_${SUB_ID}_${SES_ID}
 echo "Processing: sub-${SUB_ID}, session ${SES_ID} with home dir: ${FMRIPREP_HOME}"
 mkdir -p ${FMRIPREP_HOME}
 
