@@ -33,6 +33,7 @@ LOG_DIR=${DATA_DIR}_fmriprep_anat_slurm_log
 WORK_DIR=${DATA_DIR}_work_${SUB_ID}_${SES_ID}
 echo "Processing: sub-${SUB_ID}, session ${SES_ID} with home dir: ${FMRIPREP_HOME}"
 mkdir -p ${FMRIPREP_HOME}
+mkdir -p ${WORK_DIR}
 
 LOCAL_FREESURFER_DIR="${DERIVS_DIR}/freesurfer-6.0.1"
 mkdir -p ${LOCAL_FREESURFER_DIR}
