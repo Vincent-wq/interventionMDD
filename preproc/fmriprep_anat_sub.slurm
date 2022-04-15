@@ -19,7 +19,7 @@ WD_DIR=${HOME}/scratch
 DATA_DIR=${WD_DIR}/${DATA_NAME}
 BIDS_DIR=${DATA_DIR}_BIDS
 CON_IMG=${WD_DIR}/container_images/fmriprep_${FMRIPREP_VER}.sif
-DERIVS_DIR=${DATA_DIR}_ses-${SES_}_fmriprep_anat_${FMRIPREP_VER}
+DERIVS_DIR=${DATA_DIR}_ses-${SES_ID}_fmriprep_anat_${FMRIPREP_VER}
 
 # Need to change according to projects
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
@@ -76,7 +76,7 @@ exitcode=$?
 
 # Output results to a table
 echo "$SUB_ID    ${SLURM_ARRAY_TASK_ID}    $exitcode" \
-      >> ${LOG_DIR}/${SLURM_JOB_NAME}_${SLURM_ARRAY_JOB_ID}.tsv
+      >> ${LOG_DIR}/${SLURM_JOB_NAME}.tsv
 echo Finished tasks ${SLURM_ARRAY_TASK_ID} with exit code $exitcode
 rm -rf ${FMRIPREP_HOME}
 rm -rf ${WORK_DIR}
