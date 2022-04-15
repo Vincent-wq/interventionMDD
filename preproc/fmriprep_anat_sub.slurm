@@ -1,10 +1,10 @@
 #!/bin/bash
 #
 #SBATCH -J fmriprep_subj_vince
-#SBATCH --time=36:00:00
+#SBATCH --time=48:00:00
 #SBATCH --account=def-jbpoline
-#SBATCH --cpus-per-task=12
-#SBATCH --mem-per-cpu=8G
+#SBATCH --cpus-per-task=16
+#SBATCH --mem-per-cpu=4G
 # Outputs ----------------------------------
 #SBATCH -o %x-%A-%a_%j.out
 #SBATCH -e %x-%A-%a_%j.err
