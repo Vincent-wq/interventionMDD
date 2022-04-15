@@ -8,8 +8,6 @@
 # Outputs ----------------------------------
 #SBATCH -o %x-%A-%a_%j.out
 #SBATCH -e %x-%A-%a_%j.err
-#SBATCH --mail-user=vincent.w.qing@gmail.com
-#SBATCH --mail-type=ALL
 # ------------------------------------------
 
 DATA_NAME=(${@:1:1})
@@ -18,10 +16,10 @@ SUB_ID=(${@:3:1})
 SES_ID=(${@:4:1})
 
 WD_DIR=${HOME}/scratch
-DATA_DIR=${WD_DIR}/${DATA_NAME}${SES_ID}
+DATA_DIR=${WD_DIR}/${DATA_NAME}
 BIDS_DIR=${DATA_DIR}_BIDS
 CON_IMG=${WD_DIR}/container_images/fmriprep_${FMRIPREP_VER}.sif
-DERIVS_DIR=${DATA_DIR}_fmriprep_anat_${FMRIPREP_VER}
+DERIVS_DIR=${DATA_DIR}_ses-${SES_}_fmriprep_anat_${FMRIPREP_VER}
 
 # Need to change according to projects
 CODE_DIR=${WD_DIR}/interventionMDD/preproc
@@ -39,7 +37,6 @@ mkdir -p ${LOCAL_FREESURFER_DIR}
 # Prepare some writeable bind-mount points.
 TEMPLATEFLOW_HOST_HOME=$HOME/scratch/templateflow
 FMRIPREP_HOST_CACHE=$FMRIPREP_HOME/.cache/fmriprep
-#mkdir -p ${TEMPLATEFLOW_HOST_HOME}
 mkdir -p ${FMRIPREP_HOST_CACHE}
 
 # Make sure FS_LICENSE is defined in the container.
@@ -81,4 +78,5 @@ echo "$SUB_ID    ${SLURM_ARRAY_TASK_ID}    $exitcode" \
       >> ${LOG_DIR}/${SLURM_JOB_NAME}_${SLURM_ARRAY_JOB_ID}.tsv
 echo Finished tasks ${SLURM_ARRAY_TASK_ID} with exit code $exitcode
 rm -rf ${FMRIPREP_HOME}
+rm -rf ${WORK_DIR}
 exit $exitcode
