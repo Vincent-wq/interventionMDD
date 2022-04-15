@@ -18,7 +18,7 @@ SUB_ID=(${@:3:1})
 SES_ID=(${@:4:1})
 
 WD_DIR=${HOME}/scratch
-DATA_DIR=${WD_DIR}/${DATA_NAME}SES_ID
+DATA_DIR=${WD_DIR}/${DATA_NAME}${SES_ID}
 BIDS_DIR=${DATA_DIR}_BIDS
 CON_IMG=${WD_DIR}/container_images/fmriprep_${FMRIPREP_VER}.sif
 DERIVS_DIR=${DATA_DIR}_fmriprep_anat_${FMRIPREP_VER}

@@ -25,8 +25,9 @@ if [ ${RUN_LIST} == 'Y' ];then
 #RERUN_LIST="runningMDD_rerun.csv"
 while read line; do
     # Do what you want to $name
-    SUB_ID="$(cut -d',' -f1 <<<${line})"
+    SUB_ID_STR="$(cut -d',' -f1 <<<${line})"
     SES_ID="$(cut -d',' -f2 <<<${line})"
+    SUB_ID="$(cut -d'-' -f2 <<<${SUB_ID_STR})"
     echo 'rerunning subj: ' ${SUB_ID} ', ses' ${SES_ID}
     sbatch ${CODE_SLURM} ${DATA_NAME} ${FMRIPREP_VER} ${SUB_ID} ${SES_ID} >> ${LOG_DIR}
 done < ${RERUN_LIST}
