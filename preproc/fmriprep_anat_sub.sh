@@ -51,12 +51,12 @@ if [ -d ${OUT_DIR} ];then
 rm -rf ${OUT_DIR}
 fi
 mkdir -p ${OUT_DIR}
-LOG_DIR=${DATA_DIR}_ses-${SES_}_fmriprep_anat_log
+done
+LOG_DIR=${DATA_DIR}_fmriprep_anat_log
 if [ -d ${LOG_DIR} ];then
   rm -rf ${LOG_DIR}
 fi
 mkdir -p ${LOG_DIR}
-done
 fi
 
 if [ ${RUN_LIST_FLAG} == 'Y' ];then

@@ -1,0 +1,23 @@
+#!/bin/bash
+DATA_NAME=(${@:1:1})
+echo ${DATA_NAME}
+RES_DIR=(${@:2:1})
+echo ${RES_DIR}
+SES_=(${@:3:1})
+echo ${SES_}
+
+WD_DIR=${HOME}/scratch
+FMRIPREP_VER=20.2.7
+#CODE_DIR=${WD_DIR}/interventionMDD/preproc
+#RUN_LIST=${CODE_DIR}/runningMDD_rerun.csv
+
+# zipping
+LOG_DIR_NAME=${DATA_NAME}_fmriprep_anat_log
+zip -r ${LOG_DIR_NAME}.zip ${LOG_DIR_NAME}
+
+echo "zipping results of session "$SES_
+DERIVS_DIR_NAME=${DATA_NAME}_ses-${SES_}_fmriprep_anat_${FMRIPREP_VER}
+zip -r ${RES_DIR}/${DERIVS_DIR_NAME}_fmriprep.zip ${DERIVS_DIR_NAME}/fmriprep
+zip -r ${RES_DIR}/${DERIVS_DIR_NAME}_fs.zip ${DERIVS_DIR_NAME}/freesurfer-6.0.1
+
+echo "Zipped in  ${RES_DIR}!"
