@@ -23,7 +23,7 @@ fi
 if [ ${ZIP_LOG_FLAGE} == 'Y' ];then
 LOG_DIR_NAME=${DATA_NAME}_fmriprep_anat_log
 mv fmriprep_subj_vince* LOG_DIR_NAME
-zip -r ${LOG_DIR_NAME}.zip ${LOG_DIR_NAME}
+zip -r ${RES_DIR}/${LOG_DIR_NAME}.zip ${LOG_DIR_NAME}
 fi
 
 echo "zipping results of session "$SES_
